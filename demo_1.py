@@ -270,7 +270,7 @@ c = opt.calls
 p = opt.puts
 df_c = pd.DataFrame(c)
 df_p = pd.DataFrame(p)
-mat = df1.loc[df1['dates'] == date, 'dates_2'].iloc[0]
+mat = df1.loc[df1['dates'] == Date, 'dates_2'].iloc[0]
 T = abs((mat - today).days) / 360
 if opt_E_A == 'European':
     option_df_c = pd.DataFrame(columns=
