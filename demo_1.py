@@ -1,19 +1,16 @@
-import plotly.express as px
+
 import plotly.graph_objects as go
 import streamlit as st
-import pandas as pd
-from datetime import datetime, date
-import numpy as np
-import pandas as pd
-from pandas.io.stata import precision_loss_doc
-import pandas_datareader.data as web
+
+from datetime import datetime
+
 import yfinance as yf
-from scipy.stats import norm
+
 import time
 from BSM_Eu import *
 import requests
 import pandas as pd
-from plotly.subplots import make_subplots
+
 
 
 url = 'https://www.slickcharts.com/sp500'
