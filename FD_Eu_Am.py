@@ -58,7 +58,7 @@ def brennon_schwartz_algorithm(alpha, beta, gamma, bs, g_nui):
         x[i] = np.maximum((b_hat[i] - gamma[i - 1] * x[i - 1]) / alpha_hat[i], g_nui[i])
     return x
 
-def fidi_bs_eu(strike, r, sigma, mt, a=-0.5, b=0.5, m=500, nu_max=20000, scheme="cn"):
+def fidi_bs_eu(strike, r, sigma, mt, a=-0.5, b=0.5, m=500, nu_max=20000, scheme="cn",type='C'):
     # strike: float or integer the strike price
     # r: float/integer the risk free interest rate
     # sigma: float/integer, volatility of the underlying
@@ -67,7 +67,7 @@ def fidi_bs_eu(strike, r, sigma, mt, a=-0.5, b=0.5, m=500, nu_max=20000, scheme=
     # m: integer, grid in space
     # nu_max: integer, grid in time
     # scheme:  string corresponding to the fidi scheme: 'explicit', 'implicit' or 'cn' (cn is crank nicolson scheme)
-
+    # option type
     # returns list of v0 and spot
     # v0: option price values
     # spot: to v0 corresponding spot prices
@@ -82,7 +82,10 @@ def fidi_bs_eu(strike, r, sigma, mt, a=-0.5, b=0.5, m=500, nu_max=20000, scheme=
 
     if (scheme == "explicit") | (scheme == "implicit") | (scheme == "cn"):
         # if input correct compute
-        [v0, spot] = fidi_bs_eu_numba(strike, r, sigma, mt, a, b, m, nu_max, scheme)
+        if type == 'C':
+            [v0, spot] = fidi_bs_eu_numba(strike, r, sigma, mt, a, b, m, nu_max, scheme)
+        if type =='P':
+            [v0, spot] = fidi_bs_eu_numba2(strike, r, sigma, mt, a, b, m, nu_max, scheme)
     else:
         print("ERROR: scheme must be either 'explicit', 'implicit' or 'cn'")
         return
@@ -260,7 +263,7 @@ def fidi_bs_eu_numba2(strike, r, sigma, mt, a, b, m, nu_max, scheme):
     w = np.zeros(m + 1, dtype=np.float64)
     for i in range(0, m + 1):
         x = a + i * dx
-        w[i] = np.maximum(np.exp(0.5 * x * (q + 1)) - np.exp(0.5 * x * (q - 1)), 0)
+        w[i] = np.maximum(np.exp(0.5 * x * (q - 1) - np.exp(0.5 * x * (q + 1))), 0)
     w[0] = 0
 
     if scheme == "explicit":

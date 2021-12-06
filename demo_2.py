@@ -14,7 +14,7 @@ from BSM_Eu import *
 import requests
 import pandas as pd
 from plotly.subplots import make_subplots
-# 貼上連結
+
 url = 'https://www.slickcharts.com/sp500'
 headers = {"User-Agent" : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'}
 
@@ -78,7 +78,7 @@ df['simple_rtn'] = df['returns'].pct_change()
 sigma = np.sqrt(252) * df['returns'].std()
 
 r = yf.Ticker(ticker = '^TNX')
-uty = (r.history(start=today.replace(day=today.day-1),end=today)['Close'].iloc[-1])/100
+uty = (r.history(start=today.replace(day=today.day-4),end=today.replace(day=today.day-3))['Close'].iloc[-1])/100
 lcp = df['Close'].iloc[-1]
 
 
@@ -93,14 +93,17 @@ df1['dates_2'] = pd.to_datetime(df1['dates'])
 dd = df1['dates_2'].to_list()
 Date = st.sidebar.selectbox("Strike date",dd)
 ### Block 1#########################################################################################
-with st.beta_container():
+with st.container():
     col1, col2, col3, col4, col5, col6, col7 = st.beta_columns([1,15,1,15,1,15,1])
     with col1:
+        st.write("")
+    with col2:
         st.markdown("""
-<div class="card">
-  <div class="card-body" style="border-radius: 10px 10px 0px 0px; background: #eef9ea; padding-top: 5px; width: 350px;
-   height: 50px;">
-    <h3 class="card-title" style="background-color:#eef9ea; color:#008080; font-family:Georgia; text-align: center; padding: 0px 0;"> {}</h3>
-  </div>
-</div>
-""".format(Label.split(' - ')[1]), unsafe_allow_html=True)
+            <div class="card">
+              <div class="card-body" style="border-radius: 10px 10px 0px 0px; background: #eef9ea; padding-top: 5px; width: 350px;
+               height: 50px;">
+                <h3 class="card-title" style="background-color:#eef9ea; color:#008080; font-family:Georgia; text-align: center; padding: 0px 0;"> {}</h3>
+              </div>
+            </div>
+            """.format(Label.split(' - ')[1]), unsafe_allow_html=True)
+        st.metric()
