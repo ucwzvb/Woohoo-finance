@@ -102,14 +102,16 @@ with st.container():
         st_card(Label.split(' - ')[1], value=lcp.round(2), delta=df['returns'].iloc[-1].round(2),
                 delta_description='since last day')
         st_card('Debt Asset ratio', value=asset[0].round(4) * 100, unit='%', show_progress=True)
-        st_card('Total Cash', value=stock.info['totalCash'] / 1000000, unit='($)', show_progress=True)
+        st_card('Total Cash', value=stock.info['totalCash'] / 1000000, unit='M$', show_progress=True)
     with col2:
         progress_bar = st.sidebar.progress(0)
-
-        st.markdown("<center><font=size=300% color=#008080 > The Stock Price in Trade</font> </center> ", unsafe_allow_html=True)
+        html_subtitle = """
+                <h6 style="color:#008080; font-family:Georgia;text-align:center"> Stock Price </h6>
+                """
+        st.markdown(html_subtitle, unsafe_allow_html=True)
         df_1 = df[['Open', 'High', 'Low', 'Close']]
         last_rows = pd.DataFrame(df_1.iloc[0]).transpose()
-        chart = st.line_chart(last_rows, width=0, height=355)
+        chart = st.line_chart(last_rows, width=0, height=325)
         for i in range(len(df) - 1):
             new_rows = df_1.iloc[i + 1]
             s = i / (len(df) - 1) * 100
@@ -132,55 +134,54 @@ with st.container():
         """
         st.markdown(html_subtitle, unsafe_allow_html=True)
         st.markdown(""" 
-        <table>
-          <tr style="background-color:#eef9ea; color:#008080; font-family:Georgia; font-size: 15px">
-            <th >Previous Close</th>
-            <th >{}</th>
-            <th >Market Cap</th>
-            <th >{}T</th>
+        <table  >
+          <tr>
+            <td >Previous Close</td>
+            <td >{}</td>
+            <td >Market Cap</td>
+            <td >{}T</td>
           </tr>
-          <tr style="background-color:#eef9ea; color:#008080; font-family:Georgia; font-size: 15px">
-            <th>Open</th>
-            <th>{}</th>
-            <th>Beta (5Y Monthly)</th>
-            <th>{}</th>
+          <tr>
+            <td>Open</td>
+            <td>{}</td>
+            <td>Beta (5Y Monthly)</td>
+            <td>{}</td>
           </tr>
-          <tr style="background-color:#eef9ea; color:#008080; font-family:Georgia; font-size: 15px">
-            <th>Bid</th>
-            <th>{} x {}</th>
-            <th>PE Ratio (TTM)</th>
-            <th>{}</th>
-            
+          <tr>
+            <td>Bid</td>
+            <td>{} x {}</td>
+            <td>PE Ratio (TTM)</td>
+            <td>{}</th>
           </tr>
-          <tr style="background-color:#eef9ea; color:#008080; font-family:Georgia; font-size: 15px">
-            <th>Ask</th>
-            <th>{} x {}</th>
-            <th>EPS (TTM)</th>
-            <th>{}</th>
+          <tr>
+            <td>Ask</td>
+            <td>{} x {}</td>
+            <td>EPS(TTM)</td>
+            <td>{}</th>
           </tr>
-          <tr style="background-color:#eef9ea; color:#008080; font-family:Georgia; font-size: 15px">
-            <th>Day's Range</th>
-            <th>{} - {}</th>
-            <th>Total Revenue</th>
-            <th>{}</th>
+          <tr>
+            <td>Day's Range</td>
+            <td>{} - {}</td>
+            <td>Total Revenue</td>
+            <td>{}</th>
           </tr>
-          <tr style="background-color:#eef9ea; color:#008080; font-family:Georgia; font-size: 15px">
-            <th>52 Week Change</th>
-            <th>{}</th>
-            <th>Forward Dividend & Yield</th>
-            <th>{}</th>
+          <tr>
+            <td>52 Week Change</td>
+            <td>{}</td>
+            <td>Forward Dividend & Yield</td>
+            <td>{}</td>
           </tr>
-          <tr style="background-color:#eef9ea; color:#008080; font-family:Georgia; font-size: 15px">
-            <th>Volume</th>
-            <th>{}</th>
-            <th>Ex-Dividend Date</th>
-            <th>{}</th>
+          <tr>
+            <td>Volume</td>
+            <td>{}</td>
+            <td>Ex-Dividend Date</td>
+            <td>{}</td>
           </tr>
-          <tr style="background-color:#eef9ea; color:#008080; font-family:Georgia; font-size: 15px">
-            <th>Avg. Volume</th>
-            <th>{}</th>
-            <th>1y Target Est</th>
-            <th>{}</th>
+          <tr>
+            <td>Avg. Volume</td>
+            <td>{}</td>
+            <td>1y Target Est</td>
+            <td>{}</td>
           </tr>
         </table>
         """.format(stock.info['previousClose'],stock.info['marketCap'],stock.info['open'],stock.info['beta'],stock.info['bid'],stock.info['bidSize'],
