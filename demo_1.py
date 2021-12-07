@@ -127,7 +127,7 @@ with st.container():
     col1, col2 = st.columns([50, 50])
     with col1:
         html_subtitle = """
-        <h2 style="color:#008080; font-family:Georgia;"> Key Data : </h2>
+        <h2 style="color:#008080; font-family:Georgia;"> Key Data  </h2>
         """
         st.markdown(html_subtitle, unsafe_allow_html=True)
         st.markdown(""" 
@@ -249,7 +249,7 @@ with st.container():
                     "type": "pie"
                 }, ],
             "layout": {
-                "title": "holders  rates",
+                "title": "Share Proportion",
                 "font": { 'color': "#008080", 'family': "Georgia"},
                 'template':"none"
             }
