@@ -5,3 +5,4 @@ openpyxl==3.0.7
 yfinance==0.1.67
 requests==2.25.1
 scipy==1.6.2
+numba==0.51.2
