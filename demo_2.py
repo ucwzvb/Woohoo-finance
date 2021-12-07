@@ -355,7 +355,7 @@ if opt_E_A == 'European':
         inTheMoney = df_c.loc[df_c['strike'] == K, 'inTheMoney'].iloc[0]
         premium_call_iv = BSM_Eu(lcp, K, uty, T, sigma, 'C')
         premium_call_crr = CRR_option_value(lcp, K, uty, T, sigma, 'C', round(T * 360) * 2)
-        [v0, ci] = monte_carlo_bs_eu(lcp, K, uty, 0, sigma, T, 5000000, 'call', True)
+        [v0, ci] = monte_carlo_bs_eu(lcp, K, uty, 0, sigma, T, 500000, 'call', True)
         premium_call_mcs = v0
         premium_call_FFT = fast_fourier_bs_eu(lcp, K, uty, sigma, T, option_type='C', n=10000, m=400, t=0)
         difference_iv = market_premium - premium_call_iv
@@ -476,7 +476,7 @@ else:
         volume = df_p.loc[df_p['strike'] == K, 'volume'].iloc[0]
         inTheMoney = df_p.loc[df_p['strike'] == K, 'inTheMoney'].iloc[0]
         premium_put_crr = CRR_option_valuation_Am(lcp, K, uty, T, sigma, 100)
-        paths = sim_gbm_paths(lcp, sigma, T, uty, round(T*360), 5000000, 0, True)
+        paths = sim_gbm_paths(lcp, sigma, T, uty, round(T*360), 500000, 0, True)
         [v0, se] = monte_carlo_bs_am(K, uty, T, 'put', paths, 4, "laguerre", 'svd')
         premium_put_mcs = v0
         premium_put_BAW = getValue('American', 'Value', 'Put', lcp, K, T, uty, uty, sigma)
