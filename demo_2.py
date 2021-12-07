@@ -387,7 +387,7 @@ if opt_E_A == 'European':
         inTheMoney = df_p.loc[df_p['strike'] == K, 'inTheMoney'].iloc[0]
         premium_put_iv = BSM_Eu(lcp, K, uty, T, sigma, 'P')
         premium_put_crr = CRR_option_value(lcp, K, uty, T, sigma, 'P', round(T * 360))
-        [v0, ci] = monte_carlo_bs_eu(lcp, K, uty, 0, sigma, T, 5000000, 'put', True)
+        [v0, ci] = monte_carlo_bs_eu(lcp, K, uty, 0, sigma, T, 500000, 'put', True)
         premium_put_mcs = v0
         premium_put_FFT = fast_fourier_bs_eu(lcp, K, uty, sigma, T, option_type='C', n=10000, m=400, t=0)
         difference_iv = market_premium - premium_put_iv
@@ -524,7 +524,7 @@ html_line="""
   border-width: 1.5px;">
 """
 st.markdown(html_line, unsafe_allow_html=True)
-null8_0,row8_1= st.columns((0.09,4))
+null8_0,row8_1= st.beta_columns((0.09,4))
 
 with row8_1:
     st.write(
