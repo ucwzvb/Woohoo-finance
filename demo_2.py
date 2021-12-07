@@ -30,7 +30,7 @@ html_header = """
 <meta name="author" content="ucwzvb">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<h1 style="font-size:300%; color:#008080; font-family:Georgia"> Woohoo <br>
+<h1 style="font-size:300%; color:#008080; font-family:Georgia"> Woohoo Finance<br>
  <h2 style="font-size:50%;color:#008080; font-family:Georgia"> First and Only Web App for Stock option pricing</h3> <br>
  <hr style= "  display: block;
   margin-top: 1em;
