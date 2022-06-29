@@ -72,7 +72,7 @@ df['simple_rtn'] = df['returns'].pct_change()
 sigma = np.sqrt(252) * df['returns'].std()
 
 r = yf.Ticker(ticker='^TNX')
-uty = (r.history(start=today.replace(day=today.day-4),end=today.replace(day=today.day-3))['Close'].iloc[-1]) / 100
+uty = (r.history(start=today.replace(day=today.day-3),end=today.replace(day=today.day-2))['Close'].iloc[-1]) / 100
 lcp = df['Close'].iloc[-1]
 
 fin = stock.financials
